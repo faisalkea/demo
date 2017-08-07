@@ -1,0 +1,35 @@
+version: '3.1'
+
+services:
+  mysqldb:
+    image: mysql
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_DATABASE: myTestDB
+      MYSQL_ROOT_PASSWORD: 'secret'
+    networks:
+      - database_net
+    deploy:
+      replicas: 3
+
+  springbootdocker:
+    image: faisaljarkass/springbootjar
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - mysqldb
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      replicas: 6
+networks:
+  rabbit_net:
+    driver: overlay
+  database_net:
+    driver: overlay
