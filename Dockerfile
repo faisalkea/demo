@@ -13,16 +13,16 @@ MAINTAINER Faisal Jarkass (fafj@kea.dk)
 RUN apt-get update
 RUN apt-get install -y maven
 
-WORKDIR /demo
+WORKDIR /SpringBootDockerJar
 
 VOLUME /tmp
 
 # Prepare by downloading dependencies
-ADD pom.xml /Docker_SpringbootExample/pom.xml
+ADD pom.xml /SpringBootDockerJar/pom.xml
 RUN ["mvn", "dependency:resolve"]
 
 # Adding source, compile and package into a fat jar
-ADD src /Docker_SpringbootExample/src
+ADD src /SpringBootDockerJar/src
 
 RUN ["mvn", "clean"]
 RUN ["mvn", "package"]
