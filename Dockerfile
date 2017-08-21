@@ -13,7 +13,7 @@ MAINTAINER Faisal Jarkass (fafj@kea.dk)
 RUN apt-get update
 RUN apt-get install -y maven
 
-WORKDIR /SpringBootDockerJar
+WORKDIR /demo
 
 VOLUME /tmp
 
